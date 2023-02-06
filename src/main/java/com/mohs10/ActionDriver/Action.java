@@ -1,12 +1,12 @@
 package com.mohs10.ActionDriver;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
+
+import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,11 +15,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -51,6 +50,34 @@ public void navigateToApplication(String url)
  * @param eleName -- Name of the element
  * @throws Exception
  */
+//decodded password//
+
+public  void name(By locator,String value) {
+	
+	
+	driver = new ChromeDriver();
+	driver.get("https://demowebshop.tricentis.com/login");
+	driver.findElement(locator).sendKeys(coded(value));
+	driver.close();
+	
+}
+static String coded(String input) {
+	byte[] decodedstring =Base64.decodeBase64(input);
+
+	return (new String(decodedstring));
+	
+
+}
+
+
+
+
+
+
+
+
+
+
 public void click(By locator, String eleName) throws Exception
 {
 	try {
@@ -65,7 +92,7 @@ public void click(By locator, String eleName) throws Exception
 }
 
 
-	public void scrollByVisibilityOfElement(WebDriver driver, WebElement ele) {
+	public void scrollByVisibilityOfElement(WebDriver driver, By ele) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView();", ele);
 
@@ -157,7 +184,7 @@ public void click(By locator, String eleName) throws Exception
 		try {
 			flag = ele.isDisplayed();
 			ele.clear();
-			ele.sendKeys(text);
+			ele .sendKeys(text);
 			// logger.info("Entered text :"+text);
 			flag = true;
 		} catch (Exception e) {
@@ -757,18 +784,15 @@ public void click(By locator, String eleName) throws Exception
 	}
 	
 	
-	public void fluentWait(WebDriver driver,WebElement element, int timeOut) {
-	    Wait<WebDriver> wait = null;
-	    try {
-	        wait = new FluentWait<WebDriver>((WebDriver) driver)
-	        		.withTimeout(Duration.ofSeconds(20))
-	        	    .pollingEvery(Duration.ofSeconds(2))
-	        	    .ignoring(Exception.class);
-	        wait.until(ExpectedConditions.visibilityOf(element));
-	        element.click();
-	    }catch(Exception e) {
-	    }
-	}
+	/*
+	 * public void fluentWait(WebDriver driver,WebElement element, int timeOut) {
+	 * Wait<WebDriver> wait = null; try { wait = new
+	 * FluentWait<WebDriver>((WebDriver) driver)
+	 * .withTimeout(Duration.ofSeconds(20)) .pollingEvery(Duration.ofSeconds(2))
+	 * .ignoring(Exception.class);
+	 * wait.until(ExpectedConditions.visibilityOf(element)); element.click();
+	 * }catch(Exception e) { } }
+	 */
 	
 	public static void implicitWait(WebDriver driver, int timeOut) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -828,6 +852,10 @@ public void click(By locator, String eleName) throws Exception
 			StartBrowser.childTest.info(e);
 			throw e;
 		}
+	}
+	public void type(WebElement nameof, String name, String string) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -3,15 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.mohs10.scripts.HomeTest">
+      <class name="newpackage.sikuli">
         <methods>
-          <include name="generateReport"/>
-          <include name="beforeClass"/>
-          <include name="methodName"/>
-          <include name="afterClass"/>
-          <include name="RegisterPageTestCase"/>
+          <include name="abc"/>
         </methods>
-      </class> <!-- com.mohs10.scripts.HomeTest -->
+      </class> <!-- newpackage.sikuli -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
